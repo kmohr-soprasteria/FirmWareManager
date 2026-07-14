@@ -1,0 +1,69 @@
+@startuml p1UpdateMeasurementMgr
+skinparam responseMessageBelowArrow true
+
+title
+  p1UpdateMeasurementMgr
+end title
+
+participant "requestor" as external
+participant "p1UpdateMeasurementMgr\n" as cur
+participant "p1LoadParameters\n" as p1LoadParam #D8BFD8
+participant "p1ResolveEsAddress\n" as p1ResolveAdr #D8BFD8
+participant "updateSelectiveMwdiReplica\n" as p1UpdReplica
+participant "p1AddDevicesToMeasurementMgr\n" as p1AddDevs
+
+note over external #LightCoral
+  shall caller 
+  be embedYourself?
+end note
+
+external -> cur
+activate cur
+
+  ' LoadParams
+  cur -> p1LoadParam : {functionName=\n"p1UpdateMeasurementMgr"}
+  activate p1LoadParam
+    note over p1LoadParam
+      Loads parameters
+      from configFile
+    end note
+  cur <-- p1LoadParam : { {parameters}\n{configFile} }
+  deactivate p1LoadParam
+
+  ' ResolveEsAddress
+  loop FOR all esName
+    cur -> p1ResolveAdr : { {/parameters/sub-function=p1ResolveEsAddress}\n{configFile}\nesName }
+    activate p1ResolveAdr
+      note over p1ResolveAdr
+        Resolves ES address
+      end note
+    cur <-- p1ResolveAdr : { {esAddress} }
+    deactivate p1ResolveAdr
+  end loop
+
+  loop endless
+    ' Replicate MWDI ES
+    cur -> p1UpdReplica : { {/parameters/sub-function=p1UpdateSelectiveMwdiReplica}\nlastReplicaTime\n{mwdiEsClient}\n{mwdiReplicaEsClient}\n{loggingEsClient} }
+    activate p1UpdReplica
+      note over p1UpdReplica
+        Replicates updated CCs
+        (limited to relevant data)
+      end note
+    cur <-- p1UpdReplica : { [updatedMountNames],\ntimestamp}
+    deactivate p1UpdReplica
+
+    ' Add devices to MeasurementMgr
+    cur -> p1AddDevs : { {/parameters/sub-function=p1AddDevicesToMeasurementMgr}\n{updatedMountNames}}
+    activate p1AddDevs
+      note over p1AddDevs
+        Adds list of updated devices
+        to MeasurementManager
+      end note
+    cur <-- p1AddDevs
+    deactivate p1AddDevs
+
+  end loop
+
+
+
+@enduml

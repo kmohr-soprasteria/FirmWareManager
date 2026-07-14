@@ -1,0 +1,5 @@
+new in variables:
+- data-to-include = filter for relevant CC data (list of attributes/classes to be put under source/_source/includes in _reindex)
+
+prüfen: braucht man die ltps?
+darin sind die pm daten enthalten, die ltps sind ein nested array?

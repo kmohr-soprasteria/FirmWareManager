@@ -1,0 +1,40 @@
+@startuml p1UpdateSelectiveMwdiReplica
+skinparam responseMessageBelowArrow true
+
+title
+  p1UpdateSelectiveMwdiReplica
+end title
+
+participant "p1UpdateMeasreumentMgr\n" as requestor
+participant "p1UpdateSelectiveMwdiReplica\n" as cur
+database "MwdiEsIndex" as mwdiEs
+database "MwdiReplicaEsIndex" as mwdiReplicaEs
+database "LoggingEsIndex" as log
+
+requestor -> cur : { {parameters},\n{mwdiEsClient},\n{mwdiReplicaEsClient},\n{loggingEsClient},\nlastReplicaTime }
+activate cur
+
+  note over cur
+    Calculates periodStartTime
+    and periodEndTime
+  end note
+
+  note right cur
+    Replicates updated CCs from MWDI ES into MWDI ES Replica
+    using ElasticSearch _reindex with a range filter
+    on lastCompleteControlConstructUpdateTimeAttempt
+    and configured content filter
+  end note
+  cur -> mwdiEs
+  cur <-- mwdiReplicaEs : { [updatedMountNames],\nlastReplicationTimestamp,\nstatusMessage }
+
+  note right cur
+    Logs results of replication
+  end note
+  cur -> log : { cronjobName,\nlastReplicationTimestamp,\nupdatedMountNames,\nstatusMessage }
+
+
+requestor <-- cur : { [updatedMountNames],\ntimestamp }
+deactivate cur
+
+@enduml
