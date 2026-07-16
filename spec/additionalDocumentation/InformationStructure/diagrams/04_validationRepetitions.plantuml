@@ -1,0 +1,54 @@
+@startuml 04_validationRepetitions
+
+skinparam BackgroundColor White
+skinparam DiagramBorderColor DarkGray
+skinparam DiagramBorderThickness 2
+
+title Validation - Repetitions
+
+
+rectangle "Administrative Event" as Admin
+rectangle "Operational Event" as Oper
+database CandidateDS #E0FFFF
+database RunningDS #E0FFFF
+component Validation
+
+
+Admin --> CandidateDS
+Oper --> CandidateDS
+
+CandidateDS --> Validation
+Validation --> RunningDS 
+
+note left of CandidateDS
+  Firmware in CandidateDS to be validated
+  against approvals (incl. compatibility check)
+end note
+
+
+note left of Admin
+  Device group changed
+  
+  → at least check this device
+      1 affected device
+end note
+
+note right of Oper
+  Firmware changed in device group
+
+  → at least check all devices in this group
+      15.000 affected devices
+end note
+
+note right of Validation
+    Assumptions
+    - 50 administrative events/day
+    - 4 operational events/year
+
+    Frequency
+    - 50 devices/day
+    - 160.000 devices/year
+    - approx. 550 devices/day
+end note
+
+@enduml

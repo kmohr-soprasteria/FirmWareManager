@@ -83,6 +83,8 @@ Design decisions:
 
 This requires 50 devices/day and 160,000 devices/year, which results in 550 devices/day.  
 
+![validRep](./diagrams/04_validationRepetitions.png)  
+
 **Processing**  
 Assumptions:  
 \- The ControlConstruct::actualEquipmentTypeList in CandidateDS is copied from RunningDS, which is copied from OperationalDS.  
