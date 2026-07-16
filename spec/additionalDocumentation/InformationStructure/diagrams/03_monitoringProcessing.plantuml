@@ -1,0 +1,42 @@
+@startuml 03_monitoringProcessing
+
+title Monitoring - Processing
+
+
+together {
+  database OperationalDS #E0FFFF
+  database RunningDS #E0FFFF
+}
+rectangle Comparison
+collections CurrentAlarms #FCE5CD
+
+OperationalDS --> Comparison
+
+'edge ordering inverse because of plantuml layouting
+RunningDS <-- Comparison: update
+Comparison <-- RunningDS
+
+Comparison --> CurrentAlarms: update
+
+note left of OperationalDS
+    May contain more device
+    info than RunningDS
+end note
+
+note right of Comparison
+    Checked attributes:
+    - deviceModelName
+    - actualEquipmentTypeList
+
+    Checked also:
+    - firmware availability
+    - firmware activation status
+
+    Design Decisions
+    - Check RunningDS for contradictions
+      with OperationalDS only
+    - differences found ->
+      immediate update of RunningDS
+end note
+
+@enduml

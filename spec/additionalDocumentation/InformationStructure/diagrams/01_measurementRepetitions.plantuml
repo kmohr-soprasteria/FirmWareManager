@@ -1,0 +1,28 @@
+@startuml 01_measurementRepetitions
+
+title Measurement - Repetitions
+
+cloud Network
+rectangle "DPMDP Input Interface" as DPMDP
+database OperationalDS #E0FFFF
+
+Network --> DPMDP
+DPMDP --> OperationalDS
+
+note left on link
+    Device information
+    updated in OperationalDS.
+end note
+
+note right of DPMDP
+    Trigger
+    - New information from network
+
+    Design Decisions
+    - Reuse of existing DPMDP input interface
+
+    Frequency
+    - 320.000 devices/day
+end note
+
+@enduml

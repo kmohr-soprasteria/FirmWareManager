@@ -1,0 +1,34 @@
+@startuml 02_monitoringRepetitions
+
+title Monitoring - Repetitions
+
+database OperationalDS #E0FFFF
+database RunningDS #E0FFFF
+component Monitoring
+collections "CurrentAlarms" as AlarmList #FCE5CD
+
+OperationalDS --> Monitoring
+RunningDS --> Monitoring
+
+Monitoring --> AlarmList
+
+note left on link
+    Update alarm list
+    based on differences
+end note
+
+note right of Monitoring
+    Trigger
+    - OperationalDS changed
+    - RunningDS changed
+
+    Design Decisions
+    - No pulser, but event-driven
+    - Compare changed devices only,
+      not full data store
+
+    Frequency
+    - 324.000 devices/day
+end note
+
+@enduml

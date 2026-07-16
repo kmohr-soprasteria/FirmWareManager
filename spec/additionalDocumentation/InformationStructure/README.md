@@ -37,6 +37,8 @@ Design decision:
 
 This results in a frequency of 320,000 devices/day.  
 
+[!measRep](./diagrams/01_measurementRepetitions.png)  
+
 ### Monitoring
 
 **Repetitions**  
@@ -48,6 +50,8 @@ Design decisions:
 
 Re-use of the DPMDP input interface and sporadic input results in a frequency of 324,000 devices/day.  
 
+[!monRep](./diagrams/02_monitoringRepetitions.png)  
+
 **Processing**  
 The OperationalDS might contain more information about the device than the RunningDS.  
 
@@ -55,6 +59,8 @@ Design decisions:
 \- The comparison is limited to checking the content of the RunningDS for contradictions with the content of the OperationalDS.  
 \- Differences in some attributes (deviceModelName, actualEquipmentTypeList) lead to immediate update of the RunningDS (which might cause a need for updating the firmware attribute, too).  
 \- Apart from availability of the firmware component, its activation status is also checked.
+
+[!monProc](./diagrams/03_monitoringProcessing.png)  
 
 ### Validation
 
