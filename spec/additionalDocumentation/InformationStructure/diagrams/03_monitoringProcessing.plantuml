@@ -1,5 +1,9 @@
 @startuml 03_monitoringProcessing
 
+skinparam BackgroundColor White
+skinparam DiagramBorderColor DarkGray
+skinparam DiagramBorderThickness 2
+
 title Monitoring - Processing
 
 

@@ -1,5 +1,9 @@
 @startuml 01_measurementRepetitions
 
+skinparam BackgroundColor White
+skinparam DiagramBorderColor DarkGray
+skinparam DiagramBorderThickness 2
+
 title Measurement - Repetitions
 
 cloud Network

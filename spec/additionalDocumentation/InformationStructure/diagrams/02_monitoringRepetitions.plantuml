@@ -1,5 +1,9 @@
 @startuml 02_monitoringRepetitions
 
+skinparam BackgroundColor White
+skinparam DiagramBorderColor DarkGray
+skinparam DiagramBorderThickness 2
+
 title Monitoring - Repetitions
 
 database OperationalDS #E0FFFF
