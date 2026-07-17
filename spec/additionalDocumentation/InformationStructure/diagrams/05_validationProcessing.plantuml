@@ -1,0 +1,38 @@
+@startuml 05_validationProcessing
+
+skinparam BackgroundColor White
+skinparam DiagramBorderColor DarkGray
+skinparam DiagramBorderThickness 2
+
+title Validation - Processing
+
+database OperationalDS  #E0FFFF
+database RunningDS #E0FFFF
+database CandidateDS #E0FFFF
+component Validation
+
+OperationalDS --> RunningDS: copy CC:actualEquipmentList
+note top on link
+   Assumptions
+   - list has lot of equipment types
+   - actualEquipmentTypeList may
+     contain more equipment types
+     than listed in approvals  
+end note
+
+RunningDS --> CandidateDS: copy CC:actualEquipmentList
+
+CandidateDS --> Validation
+
+note right of Validation
+   Firmware component approval
+   depends on 
+     - firmwareComponentName && 
+       firmwareComponentVersion
+       from Firmware being
+       in FirmwareRessource
+     - deviceModelName approved
+     - Approval::approvedEquipmentTypeList
+end note
+
+@enduml

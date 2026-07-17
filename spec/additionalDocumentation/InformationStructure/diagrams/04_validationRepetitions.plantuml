@@ -21,8 +21,9 @@ CandidateDS --> Validation
 Validation --> RunningDS 
 
 note right of CandidateDS
-  Firmware in CandidateDS to be validated
-  against approvals (incl. compatibility check)
+  Firmware in CandidateDS to
+  be validated against approvals
+  (incl. compatibility check)
 end note
 
 

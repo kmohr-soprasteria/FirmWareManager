@@ -67,7 +67,7 @@ The OperationalDS might contain more information about the device than the Runni
 
 Design decisions:  
 \- The comparison is limited to checking the content of the RunningDS for contradictions with the content of the OperationalDS.  
-\- Differences in some attributes (deviceModelName, actualEquipmentTypeList) lead to immediate update of the RunningDS (which might cause a need for updating the firmware attribute, too).  
+\- Differences in some attributes (`deviceModelName`, `actualEquipmentTypeList`) lead to immediate update of the RunningDS (which might cause a need for updating the firmware attribute, too).  
 \- Apart from availability of the firmware component, its activation status is also checked.
 
 <br clear="right">
@@ -101,20 +101,24 @@ This requires 50 devices/day and 160,000 devices/year, which results in 550 devi
 
 
 **Processing**  
+
+<img align="right" src="diagrams/05_validationProcessing.png" width="35%" style="margin-left:20px;">
+
 Assumptions:  
-\- The ControlConstruct::actualEquipmentTypeList in CandidateDS is copied from RunningDS, which is copied from OperationalDS.  
+\- The `ControlConstruct::actualEquipmentTypeList` in CandidateDS is copied from RunningDS, which is copied from OperationalDS.  
 \- It contains a lot of equipment types, which are covered by firmware components that are parts of some firmware package.  
-\- These equipment types are not listed in the Approval::approvedEquipmentTypeList.  
-\- So checking for all equipment types listed in ControlConstruct::actualEquipmentTypeList being covered by an entry in Approval::approvedEquipmentTypeList would fail.  
-\- If the approval of a firmware component is restricted to specific hardware, there might be more than one entry in Approval::approvedEquipmentTypeList  
+\- These equipment types are not listed in the `Approval::approvedEquipmentTypeList`.  
+\- So checking for all equipment types listed in `ControlConstruct::actualEquipmentTypeList` being covered by an entry in `Approval::approvedEquipmentTypeList` would fail.  
+\- If the approval of a firmware component is restricted to specific hardware, there might be more than one entry in `Approval::approvedEquipmentTypeList`  
 
 Design decisions:  
-\- A firmware component from ControlConstruct::firmwareList in CandidateDS is considered to be approved, if  
-  \- the combination of {Firmware::firmwareComponentName and Firmware::firmwareComponentVersion} can be found in {FirmwareResource::firmwareComponentName and FirmwareResource::firmwareComponentVersion}  
-  \- AND the value of ControlConstruct::deviceModelName can be found in Approval::deviceModelName of the approvalList of this instance of FirmwareResource  
+\- A firmware component from `ControlConstruct::firmwareList` in CandidateDS is considered to be approved, if  
+  \- the combination of {`Firmware::firmwareComponentName` and `Firmware::firmwareComponentVersion`} can be found in {`FirmwareResource::firmwareComponentName` and `FirmwareResource::firmwareComponentVersion`}  
+  \- AND the value of `ControlConstruct::deviceModelName` can be found in `Approval::deviceModelName` of the approvalList of this instance of FirmwareResource  
   \- AND  
-    \- the Approval::approvedEquipmentTypeList is either empty  
-    \- OR at least one of the values of Approval::approvedEquipmentTypeList can be found in ControlConstruct::actualEquipmentTypeList
+    \- the `Approval::approvedEquipmentTypeList` is either empty  
+    \- OR at least one of the values of `Approval::approvedEquipmentTypeList` can be found in `ControlConstruct::actualEquipmentTypeList`
+<br clear="right">
 
 ## Relevant Device Information
 
