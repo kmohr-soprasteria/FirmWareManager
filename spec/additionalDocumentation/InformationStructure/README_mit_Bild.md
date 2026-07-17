@@ -119,21 +119,19 @@ Design decisions:
 
 ![valProc](./diagrams/05_validationProcessing.png)
 
-
-\- The 🔵ControlConstruct::actualEquipmentTypeList in CandidateDS is copied from RunningDS, which is copied from OperationalDS.  
+\- The 🟦`ControlConstruct::actualEquipmentTypeList` in CandidateDS is copied from RunningDS, which is copied from OperationalDS.  
 \- It contains a lot of equipment types, which are covered by firmware components that are parts of some firmware package.  
-\- These equipment types are not listed in the 🟢Approval::approvedEquipmentTypeList.  
-\- So checking for all equipment types listed in 🔵ControlConstruct::actualEquipmentTypeList being covered by an entry in 🟢Approval::approvedEquipmentTypeList would fail.  
-\- If the approval of a firmware component is restricted to specific hardware, there might be more than one entry in 🟢Approval::approvedEquipmentTypeList  
+\- These equipment types are not listed in the 🟩`Approval::approvedEquipmentTypeList`.  
+\- So checking for all equipment types listed in 🟦`ControlConstruct::actualEquipmentTypeList` being covered by an entry in 🟩`Approval::approvedEquipmentTypeList` would fail.  
+\- If the approval of a firmware component is restricted to specific hardware, there might be more than one entry in 🟩`Approval::approvedEquipmentTypeList`  
 
 Design decisions:  
-\- A firmware component from 🔵ControlConstruct::firmwareList in CandidateDS is considered to be approved, if  
-  \- the combination of {🟠Firmware::firmwareComponentName and 🟠Firmware::firmwareComponentVersion} can be found in {🔴FirmwareResource::firmwareComponentName and 🔴FirmwareResource::firmwareComponentVersion}  
-  \- AND the value of 🔵ControlConstruct::deviceModelName can be found in 🟢Approval::deviceModelName of the approvalList of this instance of FirmwareResource  
+\- A firmware component from 🟦`ControlConstruct::firmwareList` in CandidateDS is considered to be approved, if  
+  \- the combination of {🟨`Firmware::firmwareComponentName` and 🟨`Firmware::firmwareComponentVersion`} can be found in {🟥`FirmwareResource::firmwareComponentName` and 🟥`FirmwareResource::firmwareComponentVersion`}  
+  \- AND the value of 🟦`ControlConstruct::deviceModelName` can be found in 🟩`Approval::deviceModelName` of the approvalList of this instance of FirmwareResource  
   \- AND  
-    \- the 🟢Approval::approvedEquipmentTypeList is either empty  
-    \- OR at least one of the values of 🟢Approval::approvedEquipmentTypeList can be found in 🔵ControlConstruct::actualEquipmentTypeList
-
+    \- the 🟩`Approval::approvedEquipmentTypeList` is either empty  
+    \- OR at least one of the values of 🟩`Approval::approvedEquipmentTypeList` can be found in 🟦`ControlConstruct::actualEquipmentTypeList`
 
 ## Relevant Device Information
 
