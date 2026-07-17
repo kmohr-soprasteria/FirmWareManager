@@ -39,37 +39,6 @@ This results in a frequency of 320,000 devices/day.
 
 ![measRep](./diagrams/01_measurementRepetitions.png)  
 
-
-
-**TEST**  
-
-
-## Repetitions
-
-<table>
-<tr>
-<td width="40%" valign="top">
-
-The information about the device is updated in OperationalDS.  
-To be executed with new information being available from the network.
-
-Design decision:
-- The input interface of the DPMDP is re-used.
-
-This results in a frequency of 320,000 devices/day.
-
-</td>
-<td width="60%" valign="top">
-
-<img src="diagrams/01_measurementRepetitions.png"/>
-
-</td>
-</tr>
-</table>
-
-
-
-
 ### Monitoring
 
 **Repetitions**  
@@ -82,29 +51,6 @@ Design decisions:
 Re-use of the DPMDP input interface and sporadic input results in a frequency of 324,000 devices/day.  
 
 ![monRep](./diagrams/02_monitoringRepetitions.png)  
-
-## TEST
-
-<table>
-<tr>
-<td width="40%" valign="top">
-
-Alarm list must be updated based on differences between RunningDS and OperationalDS.  
-
-Design decisions:  
-\- Comparison is not triggered by time (Pulser), but by changes in either OperationalDS or RunningDS.  
-\- Comparison is limited to changed devices; its not required to compare the entire data store content.  
-
-Re-use of the DPMDP input interface and sporadic input results in a frequency of 324,000 devices/day.  
-
-</td>
-<td width="60%" valign="top">
-
-<img src="diagrams/02_monitoringRepetitions.png"/>
-
-</td>
-</tr>
-</table>
 
 
 **Processing**  
@@ -204,3 +150,55 @@ Design decision:
 _It is currently not clear with which values the approvals could be properly expressed and which attribute to be retrieved from the device.  
 Completeness of the content of the EquipmentType::typeName attribute might fall short the need.  
 Number of different entries in Equipment::ManufacturedThing::EquipmentType::modelIdentifier might be too high to be kept up-to-date in the approvals._  
+
+
+
+
+---
+
+# TEST
+
+### Measurement
+
+**Repetitions**
+
+<img align="right" src="diagrams/01_measurementRepetitions.png" width="45%">
+
+The information about the device is updated in OperationalDS.  
+To be executed with new information being available from the network.
+
+Design decision:
+- The input interface of the DPMDP is re-used.
+
+This results in a frequency of 320,000 devices/day.
+
+<br clear="right">
+
+### Monitoring
+
+**Repetitions**  
+
+<img align="right" src="diagrams/02_monitoringRepetitions.png" width="45%">
+
+Alarm list must be updated based on differences between RunningDS and OperationalDS.  
+
+Design decisions:  
+\- Comparison is not triggered by time (Pulser), but by changes in either OperationalDS or RunningDS.  
+\- Comparison is limited to changed devices; its not required to compare the entire data store content.  
+
+Re-use of the DPMDP input interface and sporadic input results in a frequency of 324,000 devices/day.  
+
+<br clear="right">
+
+**Processing**  
+
+<img align="right" src="diagrams/03_monitoringProcessing.png" width="45%">
+
+The OperationalDS might contain more information about the device than the RunningDS.  
+
+Design decisions:  
+\- The comparison is limited to checking the content of the RunningDS for contradictions with the content of the OperationalDS.  
+\- Differences in some attributes (deviceModelName, actualEquipmentTypeList) lead to immediate update of the RunningDS (which might cause a need for updating the firmware attribute, too).  
+\- Apart from availability of the firmware component, its activation status is also checked.
+
+<br clear="right">
