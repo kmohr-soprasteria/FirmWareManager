@@ -134,7 +134,7 @@ Design decision:
 
 This will lead to an increasing number and share of unsuccessful attempts to download and activate some firmware on devices that are no longer available in the network.  
 
-The mountName is retrieved from the ControlConstructPac::externalLabel attribute.  
+The mountName is retrieved from the `ControlConstructPac::externalLabel` attribute.  
 
 ### firmwareList
 
@@ -148,12 +148,12 @@ Assumptions:
 \- Active management of firmware can be limited to those components that can be activated individually.  
 
 Design decision:  
-\- Throughout the entire FWM application, dealing with firmware is limited to those firmware components that can be activated individually (individualActivationIsAvail==true).  
+\- Throughout the entire FWM application, dealing with firmware is limited to those firmware components that can be activated individually (`individualActivationIsAvail`==true).  
 
 ### deviceModelName
 
 The deviceModelName is considered to be the minimum criteria for assessing firmware compatibility.  
-It is retrieved from the ControlConstructPac::deviceModelName attribute.  
+It is retrieved from the `ControlConstructPac::deviceModelName` attribute.  
 
 ### actualEquipmentTypeList
 
@@ -164,8 +164,8 @@ Design decision:
 \- The actualEquipmentTypeList is to be filled from the ...  
 
 _It is currently not clear with which values the approvals could be properly expressed and which attribute to be retrieved from the device.  
-Completeness of the content of the EquipmentType::typeName attribute might fall short the need.  
-Number of different entries in Equipment::ManufacturedThing::EquipmentType::modelIdentifier might be too high to be kept up-to-date in the approvals._  
+Completeness of the content of the `EquipmentType::typeName` attribute might fall short the need.  
+Number of different entries in `Equipment::ManufacturedThing::EquipmentType::modelIdentifier` might be too high to be kept up-to-date in the approvals._  
 
 
 
