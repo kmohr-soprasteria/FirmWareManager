@@ -20,20 +20,20 @@ Oper --> CandidateDS
 CandidateDS --> Validation
 Validation --> RunningDS 
 
-note left of CandidateDS
+note right of CandidateDS
   Firmware in CandidateDS to be validated
   against approvals (incl. compatibility check)
 end note
 
 
-note left of Admin
+note top of Admin
   Device group changed
   
   → at least check this device
       1 affected device
 end note
 
-note right of Oper
+note top of Oper
   Firmware changed in device group
 
   → at least check all devices in this group
