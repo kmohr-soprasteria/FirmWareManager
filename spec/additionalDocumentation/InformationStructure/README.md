@@ -39,6 +39,37 @@ This results in a frequency of 320,000 devices/day.
 
 ![measRep](./diagrams/01_measurementRepetitions.png)  
 
+
+
+**TEST**  
+
+
+## Repetitions
+
+<table>
+<tr>
+<td width="40%" valign="top">
+
+The information about the device is updated in OperationalDS.  
+To be executed with new information being available from the network.
+
+Design decision:
+- The input interface of the DPMDP is re-used.
+
+This results in a frequency of 320,000 devices/day.
+
+</td>
+<td width="60%" valign="top">
+
+<img src="diagrams/01_measurementRepetitions.png"/>
+
+</td>
+</tr>
+</table>
+
+
+
+
 ### Monitoring
 
 **Repetitions**  
@@ -51,6 +82,30 @@ Design decisions:
 Re-use of the DPMDP input interface and sporadic input results in a frequency of 324,000 devices/day.  
 
 ![monRep](./diagrams/02_monitoringRepetitions.png)  
+
+## TEST
+
+<table>
+<tr>
+<td width="40%" valign="top">
+
+Alarm list must be updated based on differences between RunningDS and OperationalDS.  
+
+Design decisions:  
+\- Comparison is not triggered by time (Pulser), but by changes in either OperationalDS or RunningDS.  
+\- Comparison is limited to changed devices; its not required to compare the entire data store content.  
+
+Re-use of the DPMDP input interface and sporadic input results in a frequency of 324,000 devices/day.  
+
+</td>
+<td width="60%" valign="top">
+
+<img src="diagrams/02_monitoringRepetitions.png"/>
+
+</td>
+</tr>
+</table>
+
 
 **Processing**  
 The OperationalDS might contain more information about the device than the RunningDS.  
