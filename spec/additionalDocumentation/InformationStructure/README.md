@@ -156,7 +156,11 @@ Number of different entries in Equipment::ManufacturedThing::EquipmentType::mode
 
 ---
 
-# TEST
+# Layout proposal
+
+## Relevant Operations
+
+The following operations must be executed efficiently and fast.  
 
 ### Measurement
 
@@ -168,7 +172,7 @@ The information about the device is updated in OperationalDS.
 To be executed with new information being available from the network.
 
 Design decision:
-- The input interface of the DPMDP is re-used.
+\- The input interface of the DPMDP is re-used.
 
 This results in a frequency of 320,000 devices/day.
 
@@ -183,8 +187,8 @@ This results in a frequency of 320,000 devices/day.
 Alarm list must be updated based on differences between RunningDS and OperationalDS.  
 
 Design decisions:  
-\- Comparison is not triggered by time (Pulser), but by changes in either OperationalDS or RunningDS.  
-\- Comparison is limited to changed devices; its not required to compare the entire data store content.  
+- Comparison is not triggered by time (Pulser), but by changes in either OperationalDS or RunningDS.  
+- Comparison is limited to changed devices; its not required to compare the entire data store content.  
 
 Re-use of the DPMDP input interface and sporadic input results in a frequency of 324,000 devices/day.  
 
@@ -202,3 +206,16 @@ Design decisions:
 \- Apart from availability of the firmware component, its activation status is also checked.
 
 <br clear="right">
+
+
+test
+- abc
+- edg
+
+test  
+\- abc  
+\- efg  
+
+test  
+- a
+- b
