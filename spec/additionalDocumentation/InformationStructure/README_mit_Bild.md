@@ -80,7 +80,7 @@ This includes checking for compatibility with the actual hardware of the devices
 
 **Repetitions**  
 
-<img align="right" src="diagrams/04_validationRepetitions.png" width="60%" style="margin-left:20px;">
+<img align="right" src="diagrams/04_validationRepetitions.png" width="50%" style="margin-left:20px;">
 
 Changing the device group of a device requires to at least validate this device (administrative event).  
 Changing the firmware at a device group requires to at least validate all devices in this group (operational event).  
