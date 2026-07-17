@@ -102,8 +102,6 @@ This requires 50 devices/day and 160,000 devices/year, which results in 550 devi
 
 **Processing**  
 
-<img align="right" src="diagrams/05_validationProcessing.png" width="35%" style="margin-left:20px;">
-
 Assumptions:  
 \- The `ControlConstruct::actualEquipmentTypeList` in CandidateDS is copied from RunningDS, which is copied from OperationalDS.  
 \- It contains a lot of equipment types, which are covered by firmware components that are parts of some firmware package.  
@@ -118,7 +116,8 @@ Design decisions:
   \- AND  
     \- the `Approval::approvedEquipmentTypeList` is either empty  
     \- OR at least one of the values of `Approval::approvedEquipmentTypeList` can be found in `ControlConstruct::actualEquipmentTypeList`
-<br clear="right">
+
+![valProc](./diagrams/05_validationProcessing.png)
 
 ## Relevant Device Information
 
